@@ -2,6 +2,7 @@ import React from 'react';
 import "./Post.css"
 
 const Post = (props) => {
+
     return (
         <div className="post">
             <div className="post__content">
@@ -9,7 +10,10 @@ const Post = (props) => {
                 <div className="post__body">{props.post.body}</div>
             </div>
             <p className="post__buttons">
-                <button className="delete__button">Delete</button>
+                <button
+                    onClick={() => props.deletePost(props.post)}
+                    className="delete__button"
+                >Delete</button>
             </p>
         </div>
     );

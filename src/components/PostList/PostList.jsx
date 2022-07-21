@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import Post from "../Post/Post";
 
-const PostList = ({posts, title}) => {
-
+const PostList = ({deletePost, posts, title}) => {
 
     return (
         <div>
-            <h1 style={{textAlign: "center"}}>{title}</h1>
-            {posts.map(post => <Post post={post} key={post.id}/> )}
+            <h1 style={{textAlign: "center"}}>
+                {posts.length === 0 ? "No posts found":title}
+            </h1>
+            {posts.map(post => <Post deletePost={deletePost} post={post} key={post.id}/> )}
         </div>
     );
 };

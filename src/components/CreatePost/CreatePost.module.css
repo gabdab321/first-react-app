@@ -1,0 +1,25 @@
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 240px;
+}
+
+.title{
+    height: 10%;
+}
+
+.form{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 65%;
+}
+
+.item{
+    margin-top: 20px;
+}
