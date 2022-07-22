@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import "./styles/App.css"
 import PostList from "./components/PostList/PostList";
 import CreatePost from "./components/CreatePost/CreatePost";
+import MyInput from "./components/UI/Input/MyInput";
 
 function App() {
     const [posts, setPosts] = useState([
@@ -9,18 +10,25 @@ function App() {
         {id: 2, title: "Walter", body: "Sdasfadd"},
     ])
 
-    function addPost(newPost) {
-        setPosts([...posts, newPost])
+    const createPost = (newPost) => {
+        setPosts([ ...posts, {...newPost, id: Date.now()} ])
     }
 
-    function deletePost(post) {
+    const removePost = (post) => {
         setPosts(posts.filter(item => item !== post))
     }
 
     return (
         <div className="App">
-            <CreatePost posts={posts} addPost={addPost}/>
-            <PostList deletePost={deletePost} posts={posts} title={"Post list"}/>
+            <CreatePost
+                posts={posts}
+                createPost={createPost}
+            />
+            <PostList
+                removePost={removePost}
+                posts={posts}
+                title={"Post list"}
+            />
         </div>
     );
 }

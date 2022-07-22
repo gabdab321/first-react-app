@@ -60,6 +60,7 @@
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
+    border: 2px #F25050 solid;
 
     color: #FFEBEB;
     transition: all 0.4s;

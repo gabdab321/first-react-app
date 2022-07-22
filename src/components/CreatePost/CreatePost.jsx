@@ -3,34 +3,36 @@ import MyButton from "../UI/button/MyButton";
 import MyInput from "../UI/Input/MyInput";
 import classes from "./CreatePost.module.css"
 
-const CreatePost = ({addPost}) => {
-    const [postTitle, setPostTitle] = useState("")
-    const [postBody, setPostBody] = useState("")
-
-    function createPost() {
-        return {
-            id: Date.now(),
-            title: postTitle,
-            body: postBody
-        }
-    }
-
-    function clearInputs(event) {
-        event.target.querySelectorAll("input").forEach(elem => elem.value = "")
-    }
+const CreatePost = ({createPost}) => {
+    const [newPost, setNewPost] = useState({title: "", body: ""})
 
     return (
         <div className={classes.container}>
             <h1 className={classes.title}>Create your post</h1>
 
-            <form onSubmit={clearInputs} className={classes.form}>
-                <MyInput placeholder={"Post title"} onChange={event => {setPostTitle(event.target.value)} }/>
-                <MyInput placeholder={"Post body"} onChange={event => {setPostBody(event.target.value)} }/>
+            <form className={classes.form}>
+                <MyInput
+                    placeholder={"Post title"}
+                    onChange={event => setNewPost({...newPost, title: event.target.value}) }
+                    value={newPost.title}
+                />
+
+                <MyInput
+                    placeholder={"Post body"}
+                    onChange={event => setNewPost({...newPost, body: event.target.value}) }
+                    value={newPost.body}
+                />
+
                 <MyButton
                     disabled={false}
                     onClick={event => {
                         event.preventDefault()
-                        addPost(createPost())
+
+                        if(newPost.body === "" || newPost.title === "") return false
+
+                        createPost(newPost)
+
+                        setNewPost({title: "", body: ""})
                     }}
                 >Create Post</MyButton>
             </form>
