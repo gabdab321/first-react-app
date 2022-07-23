@@ -5,6 +5,9 @@ import CreatePost from "./components/CreatePost/CreatePost";
 import MyInput from "./components/UI/Input/MyInput";
 import MySelect from "./components/UI/select/MySelect";
 import PostFilter from "./components/PostFilter/PostFilter";
+import MyModal from "./components/UI/MyModal/MyModal";
+import MyButton from "./components/UI/button/MyButton";
+import {useSortedAndSearchedPosts, useSortedPosts} from "./hooks/usePosts";
 
 function App() {
     const [posts, setPosts] = useState([
@@ -13,21 +16,14 @@ function App() {
         {id: 3, title: "ALasd", body: "zxcasdfasdxaSC"},
     ])
 
+    const [modal, setModal] = useState(false)
     const [filter, setFilter] = useState({sort: "", query: ""})
 
-    const sortedPosts = useMemo(() => {
-        if(filter.sort) {
-            return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
-        }
-        return posts
-    }, [filter.sort, posts])
-
-    const sortAndSearchedPosts = useMemo(() => {
-        return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()))
-    }, [filter.query, sortedPosts])
+    const sortedPosts = useSortedAndSearchedPosts(useSortedPosts(posts, filter.sort), filter.query)
 
     const createPost = (newPost) => {
         setPosts([ ...posts, {...newPost, id: Date.now()} ])
+        setModal(false)
     }
 
     const removePost = (post) => {
@@ -36,14 +32,15 @@ function App() {
 
     return (
         <div className="App">
-            <CreatePost createPost={createPost}/>
+            <MyButton onClick={() => setModal(true)}>Create Post</MyButton>
+            <MyModal visible={modal} setVisible={setModal}><CreatePost createPost={createPost}/></MyModal>
 
             <PostFilter filter={filter} setFilter={setFilter} options={[
                 {value: "title", textContent: "Title"},
                 {value: "body", textContent: "Body"},
             ]}/>
 
-            <PostList removePost={removePost} posts={sortAndSearchedPosts} title={"Post list"}
+            <PostList removePost={removePost} posts={sortedPosts} title={"Post list"}
             />
         </div>
     );
