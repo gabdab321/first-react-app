@@ -59,11 +59,7 @@ const Posts = () => {
 
             <PostFilter filter={filter} setFilter={setFilter} options={selectOptions}/>
 
-            {postError &&
-            <Alert style={{marginTop:"20px", marginBottom: "20px"}} variant="filled" severity="error">
-                {postError}
-            </Alert>
-            }
+
 
             {isPostsLoading
                 ?
