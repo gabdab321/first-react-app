@@ -3,7 +3,7 @@ import Post from "../Post/Post";
 import "./PostList.css";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 
-const PostList = ({setRequestParams, pagesArray, removePost, posts, title}) => {
+const PostList = ({removePost, posts, title}) => {
     return (
         <div>
             <h1 style={{textAlign: "center"}}>
@@ -23,9 +23,6 @@ const PostList = ({setRequestParams, pagesArray, removePost, posts, title}) => {
                 } )}
             </TransitionGroup>
 
-            <div className="pages">
-                {pagesArray.map(pageIndex => <p onClick={e => setRequestParams({limit: 10, skip: pageIndex*10 - 10})} className="page-item" key={pageIndex}>{pageIndex}</p>)}
-            </div>
         </div>
     );
 };

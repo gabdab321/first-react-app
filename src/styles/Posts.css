@@ -1,0 +1,26 @@
+.Posts {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.post-item-enter {
+    opacity: 0;
+    transform: translateX(-20%) scale(0.9);
+}
+.post-item-enter-active {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    transition: opacity 300ms, transform 200ms;
+}
+.post-item-exit {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+.post-item-exit-active {
+    opacity: 0;
+    transform: scale(0.9) translateX(+20%);
+    transition: opacity 200ms, transform 300ms;
+}

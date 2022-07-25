@@ -1,0 +1,21 @@
+.pages{
+    margin-top: 25px;
+    width: 100%;
+    height: 100px;
+    background-color: #444444;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+}
+
+.page__item{
+    padding: 5px;
+    border: white 2px solid;
+    cursor: pointer;
+}
+
+.page__current{
+    font-weight: bold;
+    border: 4px solid #0295DB;
+}
